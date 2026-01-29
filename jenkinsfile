@@ -11,10 +11,8 @@ pipeline {
 
         stage('Unit Tests') {
             steps {
-                script {
-                    // Force a failure for testing email
-                    error "Forcing pipeline failure to test email"
-                }
+                echo 'Running unit tests'
+                sh 'mvn test'
             }
         }
 
