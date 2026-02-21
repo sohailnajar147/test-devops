@@ -17,9 +17,11 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh 'mvn clean verify sonar:sonar'
-                }
+                // We skip the 'withSonarQubeEnv' wrapper and call maven directly
+                sh "mvn sonar:sonar \
+                    -Dsonar.projectKey=student-management \
+                    -Dsonar.host.url=http://sonarqube-service.devops.svc.cluster.local:9000 \
+                    -Dsonar.login=sqa_11491b2a8612831934996b6296854622aa5c0980"
             }
         }
 
